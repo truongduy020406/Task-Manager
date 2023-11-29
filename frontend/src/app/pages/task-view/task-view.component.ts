@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { get } from 'http';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { TaskService } from 'src/app/task.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-view',
@@ -9,32 +10,39 @@ import { TaskService } from 'src/app/task.service';
   styleUrls: ['./task-view.component.scss']
 })
 export class TaskViewComponent implements OnInit {
-  public name = '';
-  selectedListId: string ='6565ad74891c2f85b31a41ed';
+  task: any;
+  lists: any;
+  selectedListId!: string;
 
-  constructor(private taskService:TaskService,private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit(): void {
-    
-    this.getdata();
-  }
-  createNewList(){
-    this.taskService.createList(this.name).subscribe((response:any)=>{
-      this.name = ""
-      this.getdata();
-    })
-  }
-  public data_api: any;
-  public getdata(): void{
-    this.taskService.getData().subscribe((data)=>{
-        this.data_api=data
-        console.log(this.data_api)
-    })
+  constructor(private taskService: TaskService, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.params.subscribe((params:Params) =>{
+      if (params['listId']) {
+        
+           this.taskService.getTasks(params['listId']).subscribe((tasks: Task[] | unknown) => {
+             this.task = tasks;
+           })
+      } else {
+        this.task = undefined;
+      }
+    });
+    // this.route.params.subscribe((params: Params) => {
+    //     if (params['listId']) {
+    //       this.selectedListId = params['listId'];
+    //       this.taskService.getTasks(params['listId']).subscribe((tasks: Task[] | unknown) => {
+    //         this.task = tasks;
+    //       })
+    //     } else {
+    //       this.task = undefined;
+    //     }
+    //   }
+    // )
+    this.taskService.getData().subscribe((list: any) => {
+      this.lists = list;
+    });
   }
 
-  onDeleteListClick() {
-    this.taskService.deleteList(this.selectedListId).subscribe((res: any) => {
-      console.log(res);
-    })
-  }
+
 }

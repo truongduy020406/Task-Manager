@@ -9,8 +9,9 @@ export class TaskService {
 
   constructor(private webReqService :WebRequestService) { }
   
-  createList(title:string){
-    return  this.webReqService.post('lists',{title})
+  createList(title: string) {
+    // We want to send a web request to create a list
+    return this.webReqService.post('lists', { title });
   }
 
   getData(){
@@ -20,9 +21,15 @@ export class TaskService {
   deleteList(id: string) {
     return this.webReqService.delete(`lists/${id}`);
   }
-
-    
+  getTasks(listId: string) {
+    return this.webReqService.get(`lists/${listId}/tasks`);
+  }
     // get<any>(url , this.httpOptions);
+  createTask(title: string,listId:string) {
+    // We want to send a web request to create a list
+    return this.webReqService.post(`lists/${listId}/tasks`, { title });
+  }
 }
+
 
 
