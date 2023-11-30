@@ -30,4 +30,7 @@ export class NewTaskComponent implements OnInit {
       }
     )
   }
+  backList(){
+    this.router.navigate(['/lists',this.listId])
+  }
 }

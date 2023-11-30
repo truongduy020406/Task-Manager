@@ -12,14 +12,13 @@ import { Task } from 'src/app/Model/task.model';
 })
 export class TaskViewComponent implements OnInit {
   lists!: List[] ;
-  tasks!: Task[] ;
+  tasks!: Task[] | undefined;
   // lists!: any ;
   // tasks!: any ;
   selectedListId!: string;
-
-
+  isCreateButtonEnabled: boolean = true;
   constructor(private taskService: TaskService, private route: ActivatedRoute) {}
-
+  
   onTaskClick(task: Task) {
     // we want to set the task to completed
     this.taskService.complete(task).subscribe(() => {
@@ -28,15 +27,19 @@ export class TaskViewComponent implements OnInit {
       task.completed = !task.completed;
     })
   }
+  
+
   ngOnInit() {
     //
     this.route.params.subscribe((params:Params) =>{
       if (params['listId']) {
+        this.selectedListId = params['listId'];
            this.taskService.getTasks(params['listId']).subscribe((tasks: Task[] | unknown) => {
              this.tasks = tasks as Task[];
+             console.log(this.tasks)
            })
       } else {
-        this.tasks = [];
+        this.tasks = undefined;
       }
     });
     
