@@ -15,7 +15,7 @@ export class SignupPageComponent implements OnInit {
   ngOnInit(): void {
   }
   signUpPage(email:string, password:string){
-    this.authoSevice.signUp(email,password).subscribe((res:HttpResponse<any>)=>{
+    this.authoSevice.signup(email,password).subscribe((res:HttpResponse<any>)=>{
       if(res.status === 200){
         this.router.navigate(['/lists']);
         console.log(res)
