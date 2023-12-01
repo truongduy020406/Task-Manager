@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TaskService } from 'src/app/task.service';
 import { List } from 'src/app/Model/list.model';
 import { Task } from 'src/app/Model/task.model';
@@ -17,7 +17,7 @@ export class TaskViewComponent implements OnInit {
   // tasks!: any ;
   selectedListId!: string;
   isCreateButtonEnabled: boolean = true;
-  constructor(private taskService: TaskService, private route: ActivatedRoute) {}
+  constructor(private taskService: TaskService, private route: ActivatedRoute,private router:Router) {}
   
   onTaskClick(task: Task) {
     // we want to set the task to completed
@@ -34,9 +34,9 @@ export class TaskViewComponent implements OnInit {
     this.route.params.subscribe((params:Params) =>{
       if (params['listId']) {
         this.selectedListId = params['listId'];
+        console.log(params['listId'])
            this.taskService.getTasks(params['listId']).subscribe((tasks: Task[] | unknown) => {
              this.tasks = tasks as Task[];
-             console.log(this.tasks)
            })
       } else {
         this.tasks = undefined;
@@ -49,6 +49,21 @@ export class TaskViewComponent implements OnInit {
       this.lists = list;
     });
   }
-  
 
+  getdataViewTask(){
+    
+  }
+  
+  onDeleteListClick(listId:string) {
+    this.taskService.deleteList(listId).subscribe((res: any) => {
+      this.router.navigate(['/lists']);
+      console.log(res);
+    })
+  }
+  onDeleteListTask(taskId: string){
+    this.taskService.deleteTask(this.selectedListId,taskId).subscribe((res:any)=>{
+      this.tasks = this.tasks!.filter(val => val._id !==taskId)
+      console.log(res);
+    })
+  }
 }

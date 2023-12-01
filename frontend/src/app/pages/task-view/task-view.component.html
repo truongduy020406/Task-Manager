@@ -11,7 +11,8 @@
                 routerLinkActive="is-active"
                 
                 >
-                    <p  >{{data.title}}</p>       
+                    <p  >{{data.title}}</p>
+                    <button (click)="onDeleteListClick(data._id)">x</button>       
                 </a>
             </div>
             <button class="button is-primary has-text-white" routerLink="/new-list">+ New List</button>
@@ -24,8 +25,9 @@
                 <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{ 'completed': task.completed }" >
                     <div class="task-text" >
                         <p>{{ task.title}}</p>
+                        
                     </div>
-                    
+                    <button (click)="onDeleteListTask(task._id)">x</button>
                 </div>
                 <h3 class="empty-state-text" *ngIf="tasks.length === 0 ">There are  no task here!</h3>
                 <button class="create-task-btn" routerLink="./new-task">

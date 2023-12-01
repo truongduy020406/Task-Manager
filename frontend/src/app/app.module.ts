@@ -11,6 +11,7 @@ import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { WebRequestService } from './web-request.service';
 import { WebRequestIntercepService } from './web-request-intercep.service';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { WebRequestIntercepService } from './web-request-intercep.service';
     TaskViewComponent,
     NewListComponent,
     NewTaskComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    SignupPageComponent
   ],
   imports: [
     BrowserModule,

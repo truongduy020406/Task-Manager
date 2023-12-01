@@ -270,7 +270,7 @@ app.delete('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
     }).then((canDeleteTasks) => {
         
         if (canDeleteTasks) {
-            Task.findOneAndRemove({
+            Task.findOneAndDelete({
                 _id: req.params.taskId,
                 _listId: req.params.listId
             }).then((removedTaskDoc) => {

@@ -29,6 +29,9 @@ export class TaskService {
     // We want to send a web request to create a list
     return this.webReqService.post(`lists/${listId}/tasks`, { title });
   }
+  deleteTask(listId:string,task: string) {
+    return this.webReqService.delete(`lists/${listId}/tasks/${task}`);
+  }
 
   complete(task: Task) {
     return this.webReqService.patch(`lists/${task._listId}/tasks/${task._id}`, {
