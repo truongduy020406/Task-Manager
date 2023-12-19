@@ -15,7 +15,7 @@ export class WebRequestIntercepService implements HttpInterceptor {
   constructor(private authService : AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
-       // Handle the request
+    // Handle the request
     request = this.addAuthoservice(request);
 
     // call next() and handle the response

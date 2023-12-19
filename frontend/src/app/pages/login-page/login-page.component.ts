@@ -24,4 +24,7 @@ export class LoginPageComponent implements OnInit {
       }
     })
   }
+  signup(){
+    this.router.navigate(['/lists']);
+  }
 }

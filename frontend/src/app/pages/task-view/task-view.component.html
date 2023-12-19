@@ -24,6 +24,7 @@
                     <h1 class="title has-text-primary">
                       Tasks
                     </h1>
+                    <div class="logout" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i></div>
                     <div class="dropdown is-hoverable is-right">
                       <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
@@ -32,6 +33,7 @@
                           </span>
                         </button>
                       </div>
+                      
                       <div class="dropdown-menu" id="dropdown-menu4" role="menu">
                         <div class="dropdown-content">
                           <a [routerLink]="['/edit-list', selectedListId]" class="dropdown-item">
@@ -42,12 +44,12 @@
                           </a>
                         </div>
                       </div>
-                      <div class="logout" routerLink="/login"><i class="fa-solid fa-right-from-bracket"></i></div>
+                      
                     </div>
                   </div>
 
                   <!--element-->
-                <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{ 'completed': task.completed }" >
+                <div class="task " *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{ 'completed': task.completed }" >
                     <div class="task-text" >
                         <p>{{ task.title}}</p>
                         

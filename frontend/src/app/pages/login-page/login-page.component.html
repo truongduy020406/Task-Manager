@@ -14,7 +14,7 @@
           </div>
           <div class="field">
             <p class="control has-icons-left">
-              <input #passwordlogin class="input" type="password" placeholder="Password">
+              <input #passwordlogin class="input" type="password" placeholder="Password" (keydown.enter)="onLoginButtonClicked(emaillogin.value,passwordlogin.value)">
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -30,7 +30,7 @@
            
           </div>
           <div class="signupnow">
-            <span>Do you have an account yet?   <a href="" routerLink="/signup">Signup</a> now!</span>
+            <span>Do you have an account yet?   <a  routerLink="/signup">Signup</a> now!</span>
           </div>
     </div>
   </div>

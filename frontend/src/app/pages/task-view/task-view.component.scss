@@ -148,8 +148,13 @@
     height: 40px;
     font-size: 20px;
     margin-top: 12px;
+    margin-right: 10px;
     border-radius: 5px;
     border: 2px solid #b5b5b5;
     z-index: 10;
+}
+
+.scolling {
+    overflow: scroll;
 }
 

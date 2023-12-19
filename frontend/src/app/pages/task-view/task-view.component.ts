@@ -15,6 +15,7 @@ export class TaskViewComponent implements OnInit {
   tasks!: Task[] | undefined;
   // lists!: any ;
   // tasks!: any ;
+  
   selectedListId!: string;
   isCreateButtonEnabled: boolean = true;
   constructor(private taskService: TaskService, private route: ActivatedRoute,private router:Router) {}
@@ -30,6 +31,7 @@ export class TaskViewComponent implements OnInit {
   
 
   ngOnInit() {
+
     //
     this.route.params.subscribe((params:Params) =>{
       if (params['listId']) {
@@ -63,5 +65,12 @@ export class TaskViewComponent implements OnInit {
       this.tasks = this.tasks!.filter(val => val._id !==taskId)
       console.log(res);
     })
+  }
+  logout(){
+    this.router.navigate(['/login']);
+    localStorage.removeItem('x-access-token');
+    localStorage.removeItem('x-refresh-token');
+    localStorage.removeItem('user-id');
+
   }
 }
